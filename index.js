@@ -403,6 +403,10 @@ app.get("/getAllUser", getAllUser, (req, res) => {
   res.send(res.data);
 });
 
+app.get("/OrderCancle", getAllOrderCancle, (req, res) => {
+  res.send(res.data);
+});
+
 app.get("/getData/:id", getData, (req, res) => {
   res.send(res.data);
 });
@@ -589,6 +593,22 @@ async function getAllUser(req, res, next) {
   let data;
   try {
     data = await User.find({});
+    if (data == null) {
+      console.log("unable to find data in db");
+      res.status(404).send({ message: "cannot find this Id" });
+    }
+  } catch (e) {
+    console.log("unable to Find data in db: ", e);
+    res.status(500).send({ message: "unable to find data in db" });
+  }
+  res.data = data;
+  next();
+}
+
+async function getAllOrderCancle(req, res, next) {
+  let data;
+  try {
+    data = await OrderCancelled.find({});
     if (data == null) {
       console.log("unable to find data in db");
       res.status(404).send({ message: "cannot find this Id" });
