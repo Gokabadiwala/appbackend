@@ -167,15 +167,7 @@ const AddressSchema = mongoose.Schema(
 );
 const QuantitySchema = mongoose.Schema(
   {
-    StartQuantity: {
-      type: String,
-      required: true,
-    },
-    MiddleQuantity: {
-      type: String,
-      required: true,
-    },
-    EndQuantity: {
+    QuantityItem: {
       type: String,
       required: true,
     },
@@ -184,15 +176,7 @@ const QuantitySchema = mongoose.Schema(
 );
 const TimeSlotSchema = mongoose.Schema(
   {
-    StartTime: {
-      type: String,
-      required: true,
-    },
-    MiddleTime: {
-      type: String,
-      required: true,
-    },
-    EndTime: {
+    TimeItem: {
       type: String,
       required: true,
     },
@@ -314,11 +298,9 @@ app.post("/addAddress", function (req, res) {
 
 app.post("/manageQuantity", function (req, res) {
   console.log(req.body);
-  const { StartQuantity, MiddleQuantity, EndQuantity } = req.body;
+  const { QuantityItem } = req.body;
   const manageQuantitys = new manageQuantity({ 
-    StartQuantity,
-    MiddleQuantity,
-    EndQuantity,
+    QuantityItem  
   });
 
   manageQuantitys
@@ -331,11 +313,9 @@ app.post("/manageQuantity", function (req, res) {
     });
 });
 app.post("/manageTime", function (req, res) {
-  const { StartTime, MiddleTime, EndTime } = req.body;
+  const { TimeItem } = req.body;
   const TimeSlots = new TimeSlot({
-    StartTime,
-    MiddleTime,
-    EndTime,
+    TimeItem,
   });
 
   TimeSlots.save()
